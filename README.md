@@ -115,3 +115,18 @@ Kaggle facial keypoint detection using pytorch lightning
 !["model3 validation result"](images/model3_out.png)
 * validation loss : 2.500764
 * kaggle test loss : 4.05836
+### 4)
+* from code in https://www.kaggle.com/code/kleckaa/facial-keypoint-detection-resnet50-aug
+* 데이터 전처리 안함(255로 나누기 X)
+* 3\)의 모델에서 pretrained resnet50모델 바로 다음에 Dropout(0.1)->Linear(2048,30)으로 교체
+* ScaledSigmoid제거. 예측값이 <0.0, >96.0이면 각각 0.0, 96.0으로 설정
+* optimizer : <code>Adam</code>
+* learning rate scheduler(<code>ReduceLROnPlateau</code>) 사용
+* 데이터 증식
+  * rotation(-30, -20, -10, 10, 20, 30)
+  * shift(5, 15)
+  * brightness(x1.2, x0.6)
+* validation set result
+!["model3 validation result"](images/model4_out.png)
+* validation loss : 1.403845
+* kaggle test loss : 2.52626
